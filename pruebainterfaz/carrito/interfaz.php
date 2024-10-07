@@ -24,7 +24,7 @@ $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
         </nav>
         <nav>
             <ul>
-                <li><a href="/html/pagina-inicio.html">Inicio</a></li>
+                <li><a href="../html/pagina-inicio.html">Inicio</a></li>
                 <li><a href="/html/error-404.html">Contacto</a></li>
             </ul>
         </nav>
