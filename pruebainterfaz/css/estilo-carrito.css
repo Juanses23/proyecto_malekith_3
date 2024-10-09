@@ -20,7 +20,7 @@ p {
 /* Botón */
 .btn {
     display: inline-block;
-    background-color: #3498db;
+    background-color: #4DA768;
     color: white;
     padding: 10px 20px;
     margin: 20px 0;
@@ -33,7 +33,7 @@ p {
 }
 
 .btn:hover {
-    background-color: #2980b9;
+    background-color: #4DA768;
 }
 
 /* Tabla de carrito */
@@ -52,7 +52,7 @@ table th, table td {
 }
 
 table th {
-    background-color: #3498db;
+    background-color: #4DA768;
     color: white;
     font-weight: bold;
 }
@@ -67,7 +67,7 @@ table td {
 
 /* Para mensajes de compra */
 .message {
-    color: #27ae60;
+    color: #4DA768;
     text-align: center;
     font-size: 18px;
 }
@@ -82,7 +82,7 @@ table td {
 footer {
     text-align: center;
     padding: 10px;
-    background-color: #3498db;
+    background-color: #4DA768;
     color: white;
     position: absolute;
     width: 100%;

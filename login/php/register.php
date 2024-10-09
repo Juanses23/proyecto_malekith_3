@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Ejecutar la consulta
         if ($stmt->execute()) {
-            header("Location: ../php/login.php");
+            header("Location: ../php/index.php");
             exit();
         } else {
             $error = "Error al registrar. Inténtalo de nuevo.";

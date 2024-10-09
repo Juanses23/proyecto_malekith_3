@@ -46,6 +46,26 @@ $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
                 </form>
             <?php } ?>
         </section>
+        <section class="add-product">
+            <h2>Agregar Nuevo Producto</h2>
+            <form action="agregar_producto.php" method="post" enctype="multipart/form-data">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" name="descripcion" id="descripcion" required>
+    
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" name="cantidad" id="cantidad" required>
+    
+            <label for="precio">Precio:</label>
+            <input type="number" name="precio" id="precio" required>
+
+            <label for="imagen">Imagen:</label>
+            <input type="file" name="imagen" id="imagen" accept="image/*" required>
+
+            <input type="submit" name="submit" value="Agregar Producto">
+</form>
+
+        </section>
+
     </main>
     <footer>
         <h2>Sobre Nosotros</h2>

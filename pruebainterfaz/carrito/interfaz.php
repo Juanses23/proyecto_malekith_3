@@ -1,4 +1,5 @@
 <?php
+session_start();
 $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
 ?>
 
@@ -19,8 +20,14 @@ $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
             <ul class="right">
                 <li><a href="../agregar/agregar.php">Empresa <img src="../icon/carrito-de-compras.png" alt="Carrito" class="icono"></a></li>
                 <li><a href="carrito.php">Carrito <img src="../icon/carrito-de-compras.png" alt="Carrito" class="icono"></a></li>
-                <li><a href="/proyecto_malekith_3/login/php/index.php">Iniciar sesión <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
+                <?php if(isset($_SESSION['usuario'])): ?>
+                    <li><a href="#"><?php echo htmlspecialchars($_SESSION['usuario']); ?> <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
+                    <li><a href="/proyecto_malekith_3/login/php/logout.php">Cerrar sesión</a></li>
+                <?php else: ?>
+                    <li><a href="/proyecto_malekith_3/login/php/index.php">Iniciar sesión <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
+                <?php endif; ?>
             </ul>
+
         </nav>
         <nav>
             <ul>

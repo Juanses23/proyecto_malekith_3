@@ -15,13 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $passsword = $_POST['passsword'];
 
-    // Preparar la consulta
-    $sql = "SELECT * FROM usuario WHERE email='$email' AND passsword='$passsword'";
+    // Preparar la consulta para obtener el nombre del usuario
+    $sql = "SELECT nombre, email FROM usuario WHERE email='$email' AND passsword='$passsword'";
     $result = $conexion->query($sql);
 
     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
         session_start();
-        $_SESSION['usuario'] = $email;
+        $_SESSION['usuario'] = $row['nombre']; // Almacena el nombre en la sesión
         header("Location: /proyecto_malekith_3/pruebainterfaz/carrito/interfaz.php");
         exit();
     } else {
