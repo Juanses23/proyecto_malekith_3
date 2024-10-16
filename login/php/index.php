@@ -1,5 +1,4 @@
 <?php
-// Código PHP para la conexión y verificación del inicio de sesión
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $server = "localhost";
     $user = "root";
@@ -16,14 +15,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $passsword = $_POST['passsword'];
 
     // Preparar la consulta para obtener el nombre del usuario
-    $sql = "SELECT nombre, email FROM usuario WHERE email='$email' AND passsword='$passsword'";
+    $sql = "SELECT nombre, email, id_administrador FROM usuario WHERE email='$email' AND passsword='$passsword'";
     $result = $conexion->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         session_start();
         $_SESSION['usuario'] = $row['nombre']; // Almacena el nombre en la sesión
-        header("Location: /proyecto_malekith_3/pruebainterfaz/carrito/interfaz.php");
+        if ($row['id_administrador'] !== null) {
+            header("Location: /proyecto_malekith_3/pruebainterfaz/agregar/agregar.php");
+        } else {
+            header("Location: /proyecto_malekith_3/pruebainterfaz/carrito/interfaz.php");
+        }
         exit();
     } else {
         $error = "Credenciales incorrectas. Inténtalo de nuevo.";

@@ -21,6 +21,7 @@ if (isset($_POST['pagar'])) {
                 mysqli_query($connect, $update_query);
             } else {
                 echo "<p class='error-message'>No hay suficiente stock para el producto: " . $producto['nombre'] . "</p>";
+                break;
             }
         }
 

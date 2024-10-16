@@ -1,6 +1,9 @@
 <?php
 session_start();
 $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
+
+// Obtener el ID de la categoría seleccionada
+$categoriaSeleccionada = isset($_GET['categoria']) ? (int)$_GET['categoria'] : 0;
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +21,6 @@ $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
                 <h1>Maxiaseo</h1>
             </ul>
             <ul class="right">
-                <li><a href="../agregar/agregar.php">Empresa <img src="../icon/carrito-de-compras.png" alt="Carrito" class="icono"></a></li>
                 <li><a href="carrito.php">Carrito <img src="../icon/carrito-de-compras.png" alt="Carrito" class="icono"></a></li>
                 <?php if(isset($_SESSION['usuario'])): ?>
                     <li><a href="#"><?php echo htmlspecialchars($_SESSION['usuario']); ?> <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
@@ -36,19 +38,46 @@ $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
             </ul>
         </nav>
     </header>
+    
     <main>
+        <section class="filter-buttons">
+            <form method="get" action="">
+                <button type="submit" name="categoria" value="0">Todas</button>
+                <?php
+                // Obtener categorías desde la base de datos
+                $catQuery = "SELECT * FROM categoria";
+                $catResult = mysqli_query($connect, $catQuery);
+                while ($catRow = mysqli_fetch_array($catResult)) {
+                    echo '<button type="submit" name="categoria" value="' . $catRow['id_categoria'] . '">' . $catRow['nombre_categoria'] . '</button>';
+                }
+                ?>
+            </form>
+        </section>
         <section class="product-list">
             <?php
+            // Filtrar productos por categoría
             $query = "SELECT * FROM producto";
+            if ($categoriaSeleccionada > 0) {
+                $query .= " WHERE id_categoria = $categoriaSeleccionada";
+            }
             $result = mysqli_query($connect, $query);
 
+            // Mostrar productos
             while ($row = mysqli_fetch_array($result)) { ?>
                 <form method="post" action="carrito.php?id=<?= $row['id_producto'] ?>" class="product">
                     <img src="../img/<?= $row['imagen'] ?>" alt="">
                     <h2><?= $row['descripcion_producto']; ?></h2>
-                    <h2 class="canti">Cantidad: <?= $row['cantidad_producto']; ?></h2>
                     <span>$<?= number_format($row['valor_producto'], 2); ?></span>
-                    <input type="number" name="cantidad" value="1" class="quantity" min="1" max="<?= $row['cantidad_producto']; ?>">
+                    <div class="input-box">
+                        <select name="cantidad" class="quantity" required>
+                            <?php
+                                $maxCantidad = $row['cantidad_producto']; // Valor máximo de cantidad
+                                for ($i = 1; $i <= $maxCantidad; $i++) {
+                                    echo "<option value='$i'>$i</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
                     <input type="hidden" name="nombre" value="<?= $row['descripcion_producto']; ?>">
                     <input type="hidden" name="precio" value="<?= $row['valor_producto']; ?>">
                     <input type="submit" name="add_to_cart" class="btn" value="Añadir al carrito">

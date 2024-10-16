@@ -1,5 +1,14 @@
 <?php
 $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
+
+// Verifica la conexión
+if (!$connect) {
+    die("Conexión fallida: " . mysqli_connect_error());
+}
+
+// Consulta para obtener las categorías
+$categoryQuery = "SELECT id_categoria, nombre_categoria FROM categoria";
+$categoryResult = mysqli_query($connect, $categoryQuery);
 ?>
 
 <!DOCTYPE html>
@@ -14,16 +23,53 @@ $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
     <header>
         <nav>
             <ul>
-                <h1>Maxiaseo Agregar Stock</h1>
+                <h1>Maxiaseo Admin</h1>
             </ul>
             <ul class="right">
-                <li><a href="carrito.php">Elementos para añadir</a></li>
-                <li><a href="../carrito/interfaz.php">Volver</a></li>
+                <li><a href="carrito.php">Elementos</a></li>
+                <li><a href="../agregar/crear_categoria.php">Categorias</a></li>
+                <li><a href="../agregar/listar_usuarios.php">ModificarUsuarios</a></li>
+                <?php if(isset($_SESSION['usuario'])): ?>
+                    <li><a href="#"><?php echo htmlspecialchars($_SESSION['usuario']); ?> <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
+                    <li><a href="/proyecto_malekith_3/login/php/logout.php">Cerrar sesión</a></li>
+                <?php else: ?>
+                    <li><a href="/proyecto_malekith_3/login/php/index.php">Iniciar sesión <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
+                <?php endif; ?>
             </ul>
             
         </nav>
     </header>
     <main>
+        <section class="add-product">
+            <h2>Agregar Nuevo Producto</h2>
+            <form action="agregar_producto.php" method="post" enctype="multipart/form-data">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" name="descripcion" id="descripcion" required>
+        
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" name="cantidad" id="cantidad" required>
+        
+                <label for="precio">Precio:</label>
+                <input type="number" name="precio" id="precio" required>
+
+                <label for="imagen">Imagen:</label>
+                <input type="file" name="imagen" id="imagen" accept="image/*" required>
+
+                <label for="categoria">Categoría:</label>
+                <select name="categoria" id="categoria" required>
+                    <option value="">Selecciona una categoría</option>
+                    <?php
+                    // Iterar a través de los resultados de las categorías y agregarlos al menú desplegable
+                    while ($row = mysqli_fetch_assoc($categoryResult)) {
+                        echo "<option value='" . $row['id_categoria'] . "'>" . $row['nombre_categoria'] . "</option>";
+                    }
+                    ?>
+                </select>
+
+                <input type="submit" name="submit" value="Agregar Producto">
+            </form>
+
+        </section>
         <section class="product-list">
             <?php
             $query = "SELECT * FROM producto";
@@ -46,25 +92,7 @@ $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
                 </form>
             <?php } ?>
         </section>
-        <section class="add-product">
-            <h2>Agregar Nuevo Producto</h2>
-            <form action="agregar_producto.php" method="post" enctype="multipart/form-data">
-            <label for="descripcion">Descripción:</label>
-            <input type="text" name="descripcion" id="descripcion" required>
-    
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" name="cantidad" id="cantidad" required>
-    
-            <label for="precio">Precio:</label>
-            <input type="number" name="precio" id="precio" required>
-
-            <label for="imagen">Imagen:</label>
-            <input type="file" name="imagen" id="imagen" accept="image/*" required>
-
-            <input type="submit" name="submit" value="Agregar Producto">
-</form>
-
-        </section>
+        
 
     </main>
     <footer>

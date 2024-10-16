@@ -69,10 +69,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <input type="text" name="apellido" placeholder="Apellidos" class="input-control" required>
                     </div>
                     <div class="input-box">
+                        Fecha de nacimiento
                         <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-control" required>
                     </div>
                     <div class="input-box">
-                        <input type="number" name="cedula" placeholder="Cedula" class="input-control" required>
+                        Tipo de documento
+                        <select name="typee" class="input-control" required>
+                            <option value="" disabled selected>Seleccione...</option>
+                            <option value="Cédula">Cédula</option>
+                            <option value="Tarjeta de Identidad">Tarjeta de Identidad</option>
+                        </select>
+                    </div>
+                    <div class="input-box">
+                        <input type="number" name="cedula" placeholder="Numero" class="input-control" required>
                     </div>
                     <div class="input-box">
                         <input type="text" name="ciudad" placeholder="Ciudad" class="input-control" required>
