@@ -32,6 +32,9 @@ $result = $conexion->query($sql);
     <form action="agregar.php" method="GET" style="margin-bottom: 20px;">
         <button type="submit">Volver</button>
     </form>
+    <form action="fpdf/pruebaV.php" target="_blank" method="GET" style="margin-bottom: 20px;">
+        <button type="submit" >Reporte de usuarios</button>
+    </form>
 
     <table border="1">
         <tr>

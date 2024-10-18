@@ -1,5 +1,6 @@
 <?php
 $connect = mysqli_connect("localhost", "root", "juanses23", "malekith");
+session_start();
 
 // Verifica la conexión
 if (!$connect) {
@@ -26,15 +27,20 @@ $categoryResult = mysqli_query($connect, $categoryQuery);
                 <h1>Maxiaseo Admin</h1>
             </ul>
             <ul class="right">
-                <li><a href="carrito.php">Elementos</a></li>
-                <li><a href="../agregar/crear_categoria.php">Categorias</a></li>
-                <li><a href="../agregar/listar_usuarios.php">ModificarUsuarios</a></li>
+                
                 <?php if(isset($_SESSION['usuario'])): ?>
                     <li><a href="#"><?php echo htmlspecialchars($_SESSION['usuario']); ?> <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
                     <li><a href="/proyecto_malekith_3/login/php/logout.php">Cerrar sesión</a></li>
                 <?php else: ?>
                     <li><a href="/proyecto_malekith_3/login/php/index.php">Iniciar sesión <img src="../icon/iniciosesion.png" alt="icono foto" class="icono"></a></li>
                 <?php endif; ?>
+                
+            </ul>
+            <ul>
+                <li><a href="carrito.php">Elementos</a></li>
+                <li><a href="../agregar/crear_categoria.php">Categorias</a></li>
+                <li><a href="../agregar/listar_usuarios.php">ModificarUsuarios</a></li>
+                <li><a href="../agregar/listar_proveedores.php">Listar proveedores</a></li>
             </ul>
             
         </nav>
@@ -80,7 +86,7 @@ $categoryResult = mysqli_query($connect, $categoryQuery);
                     <img src="../img/<?= $row['imagen'] ?>" alt="">
                     <h2><?= $row['descripcion_producto']; ?></h2>
                     <h2 class="canti">Cantidad: <?= $row['cantidad_producto']; ?></h2>
-                    <input type="number" name="cantidad" value="1" class="quantity" min="1" max="<?= $row['cantidad_producto']; ?>">
+                    <input type="number" name="cantidad" value="1" class="quantity" min="1"; ?>
                     <input type="hidden" name="nombre" value="<?= $row['descripcion_producto']; ?>">
                     <input type="hidden" name="precio" value="<?= $row['valor_producto']; ?>">
                     <input type="submit" name="add_to_cart" class="btn" value="Agregar elementos">

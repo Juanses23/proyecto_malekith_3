@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --green: hsl(162,45%,56%);
+    --lead: hsl(162,2%,56%);
+    --blue: hsl(220,85%,57%);
+    --bg-col: #26874E;
+    --light-gray: hsl(0,0%,90%);
+    --white: hsl(0,0%,100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--white);
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+}
+
+h1 {
+    color: var(--bg-col);
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Botón */
+.btn {
+    display: inline-block;
+    background-color: var(--bg-col);
+    color: var(--white);
+    padding: 10px 20px;
+    margin: 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.btn:hover::before {
+    background-color: hsla(0,0%,0%,0.3);
+}
+
+/* Tabla */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: var(--light-gray);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: var(--bg-col);
+    color: var(--white);
+    font-weight: bold;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    color: #333;
+}
+
+/* Formulario */
+form {
+    width: 60%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+form input[type="text"], form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="submit"] {
+    width: 100%;
+    background-color: var(--bg-col);
+    color: var(--white);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: var(--blue);
+}
+
+/* Mensajes */
+.message {
+    color: var(--green);
+    text-align: center;
+    font-size: 18px;
+}
+
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    font-size: 18px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-col);
+    color: var(--white);
+    text-align: center;
+    padding: 1rem 0;
+}

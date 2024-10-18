@@ -26,9 +26,9 @@ if (isset($_POST['pagar'])) {
 
         // Limpiar el carrito después de pagar
         $_SESSION['carrito'] = array();
-        echo "<p class='message'>Compra realizada con éxito.</p>";
+        echo "<p class='message'>Elementos añadidos con exito.</p>";
     } else {
-        echo "<p class='error-message'>El carrito está vacío.</p>";
+        echo "<p class='error-message'>El inventario está vacío.</p>";
     }
 }
 ?>
@@ -42,12 +42,12 @@ if (isset($_POST['pagar'])) {
     <link rel="stylesheet" href="../css/estilo-carrito.css">
 </head>
 <body>
-    <h1>Proceso de Pago</h1>
+    <h1>Proceso de inventario</h1>
 
     <?php if (!empty($_SESSION['carrito'])): ?>
-        <p class="message">Gracias por tu compra. Los productos han sido descontados del inventario.</p>
+        <p class="message">Productos añadido al inventario</p>
     <?php else: ?>
-        <p class="error-message">No hay productos en tu carrito.</p>
+        <p class="error-message">No hay productos.</p>
     <?php endif; ?>
 
     <a href="agregar.php" class="btn">Volver a la Tienda</a>
